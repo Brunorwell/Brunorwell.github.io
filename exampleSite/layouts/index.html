@@ -71,8 +71,8 @@
         <li><a href="https://instagram.com/{{ .Site.Data.homepage.social.instagram }}"> <img
                     class="contain" src="https://cdn.svgporn.com/logos/instagram-icon.svg" alt="Instagram" loading="lazy"></a></li>
         {{ end }}{{ if .Site.Data.homepage.social.gmail }}
-        <li><a href="mailto:{{ .Site.Data.homepage.social.gmail }}@gmail.com" > <img
-                    class="contain" src="https://cdn.svgporn.com/logos/google-gmail.svg" alt="Gmail" loading="lazy"></a></li>
+        <li><a href="mailto:{{ .Site.Data.homepage.social.gmail }}@outlook.com" > <img
+                    class="contain" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftoutlook.svg" alt="Gmail" loading="lazy"></a></li>
         {{ end }}{{ if .Site.Data.homepage.social.hotmail }}
         <li><a href="mailto:{{ .Site.Data.homepage.social.hotmail }}@hotmail.com" > <img
                     class="contain" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftoutlook.svg" alt="Hotmail" loading="lazy"></a></li>
@@ -167,7 +167,10 @@
 -->
 {{ if .Site.Data.homepage.skill.enable }}
 
-{{ range .Site.Data.homepage.skill.item }}
+{{ $items := sort .Site.Data.homepage.skill.item "category" }}
+
+<!-- MODAIS -->
+{{ range $items }}
 <div id="modal_{{cond (isset . "titlealt") .titlealt (replaceRE "\\W" "_" .title) }}" uk-modal>
     <div class="uk-modal-dialog uk-modal-body">
         <button class="uk-modal-close-default" type="button" uk-close></button>
@@ -180,36 +183,66 @@
 {{ end }}
 
 <section class="uk-margin-large-top uk-margin-large-bottom">
-    <div class="uk-container">
-        <h1 class="uk-heading-line uk-text-center uk-heading-medium"><span>Skills</span></h1>
+  <div class="uk-container">
+    
+    <!-- TÍTULO -->
+    <h1 class="uk-heading-line uk-text-center uk-heading-medium">
+      <span>Skills</span>
+    </h1>
 
-        <p class="uk-text-center uk-text-lead"><i>Click the images below to find out more</i></p>
-        <div class="uk-child-width-1-6@l uk-child-width-1-3@m uk-child-width-1-3@s uk-child-width-1-2 uk-text-center uk-flex-center"
-            uk-grid>
-            {{ range .Site.Data.homepage.skill.item }}
-            <div class="imagemargin">
-                <!-- DEBUG: {{ .category }} -->
-                 <p>TEST: {{ .testefield }}</p>
-                <img class="contain skills" src="{{.logo}}" alt="{{.company}}" loading="lazy" style="cursor: pointer"
-                    uk-toggle="target: #modal_{{cond (isset . "titlealt") .titlealt (replaceRE "\\W" "_" .title) }}">
-                <h4>{{.title }}</h4>
-                {{ if .category }}<p style="font-size: 0.9em; color: #666; margin: 0.5em 0;">{{.category}}</p>{{ end }}
+    <!-- CATEGORIAS LADO A LADO -->
+    <div class="uk-flex uk-flex-center uk-flex-wrap" style="gap: 50px; margin-top: 20px;">
+
+      {{ $lastCat := "" }}
+
+      {{ range $items }}
+        {{ if ne .category $lastCat }}
+
+          <div class="uk-text-center" style="margin-top: 10px;">
+
+            <!-- ÍCONES -->
+            <div style="display: flex; gap: 20px; justify-content: center;">
+              {{ $current := .category }}
+
+              {{ range $items }}
+                {{ if eq .category $current }}
+                  <div class="imagemargin">
+                    <img class="contain skills"
+                         src="{{.logo}}"
+                         style="cursor: pointer; width: 50 px; height: 50 px; object-fit: contain;"
+                         uk-toggle="target: #modal_{{cond (isset . "titlealt") .titlealt (replaceRE "\\W" "_" .title) }}">
+                    
+                    <!-- TÍTULO DO SKILL -->
+                    <h4 style="margin: 3px 0 0 0; font-size: 1em;">
+                      {{.title}}
+                    </h4>
+                  </div>
+                {{ end }}
+              {{ end }}
+
             </div>
-            {{ end }}
-        </div>
+
+            <!-- LINHA -->
+            <hr style="width: 200px; height: 2px; margin: 2px auto 0 auto;">
+
+            <!-- CATEGORIA -->
+            <p style="font-size: 0.9em; color: #5d5d5d; margin: 2px auto 0 auto;">
+              {{ .category }}
+            </p>
+
+          </div>
+
+          {{ $lastCat = .category }}
+
+        {{ end }}
+      {{ end }}
 
     </div>
 
+  </div>
 </section>
 
-
-
-
-
-
-<!-- /skills -->
 {{ end }}
-
 
 
 <!--

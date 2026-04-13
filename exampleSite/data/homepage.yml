@@ -1,26 +1,50 @@
 ---
 banner:
-  title: Hi! I’m Sam
+  title: Olá! Meu nome é Bruno
 social:
   twitter: ""
-  linkedin: sam-robbins-gb
-  github: samrobbins85
+  linkedin: brunorwell
+  github: Brunorwell
   gitlab: ""
   facebook: ""
   instagram: ""
-  gmail: samrobbinsgb
+  gmail: brunorwell12
 about:
   enable: true
-  content: 2nd Year Durham Computer Science Student
+  content: Estou no terceiro ano do meu curso de Ciência da Computação e estagiário de analise de dados na SEG Automotive.
   button:
     btnText: Find out more
     URL: "/about"
 skill:
   enable: true
   item:
-    - title: JavaScript
-      logo: https://res.cloudinary.com/samrobbins/image/upload/v1591793272/logos/logos_javascript_adj1dx.svg
+    - title: Power BI
+      category: Análise de Dados
+      logo: logos/power_bi.png
       description: Details coming soon, contact me if you want to know more
+    - title: Python
+      category: Análise de Dados
+      logo: logos/python.svg
+      description: Data analysis and scripting
+
+    - title: Power Apps
+      category: RPA
+      logo: logos/power_apps.png
+      description: Front-end web development
+    - title: Power Automate
+      category: RPA
+      logo: logos/power_automate.png
+      description: Back-end web development and automation
+    - title: VBA
+      category: RPA
+      logo: logos/vba.svg
+
+    - title: DER
+      category: SQL
+      logo: logos/sql1.png
+      description: Data analysis and database management
+
+
 experience:
   enable: true
   item:
@@ -29,14 +53,14 @@ experience:
       company: Google
       duration: November 2019
 hackathons:
-  enable: true
+  enable: false
   item:
     - title: Hack Cambridge 2019
       description: Climate change simulator
       image: https://res.cloudinary.com/samrobbins/image/upload/f_auto,q_auto/v1591793405/stickers/Hack_Cambridge_101_ozoq5d.png
       url: none
 certifications:
-  enable: true
+  enable: false
   item:
     - title: Microsoft Azure Fundamentals
       image: https://res.cloudinary.com/samrobbins/image/upload/v1592501459/microsoft-certified-fundamentals-badge_cpcgyn.svg
