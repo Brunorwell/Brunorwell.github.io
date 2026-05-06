@@ -49,7 +49,7 @@ skill:
 experience:
   enable: true
   item:
-    - logo: logos/seg.png
+    - logo: logos/empresa.png
       title: Estagiário de Analise de Dados
       company: SEG Automotive
       duration: Abril 2025 - Presente 
