@@ -12,46 +12,48 @@ social:
 about:
   enable: true
   content: Estou no terceiro ano do meu curso de Ciência da Computação e estagiário de analise de dados na SEG Automotive.
-  button:
-    btnText: Find out more
-    URL: "/about"
+  #button:
+    #btnText: Find out more
+    #URL: "/about"
 skill:
   enable: true
   item:
     - title: Power BI
       category: Análise de Dados
       logo: logos/power_bi.png
-      description: Details coming soon, contact me if you want to know more
+      description: Detalhes vindo em breve!
     - title: Python
       category: Análise de Dados
       logo: logos/python.svg
-      description: Data analysis and scripting
+      description: Detalhes vindo em breve!
 
     - title: Power Apps
       category: RPA
       logo: logos/power_apps.png
-      description: Front-end web development
+      description: Detalhes vindo em breve!
     - title: Power Automate
       category: RPA
       logo: logos/power_automate.png
-      description: Back-end web development and automation
+      description: Detalhes vindo em breve!
     - title: VBA
       category: RPA
       logo: logos/vba.svg
+      description: Detalhes vindo em breve!
 
     - title: DER
       category: SQL
       logo: logos/sql1.png
-      description: Data analysis and database management
+      description: Projeto disponível na aba de portfólio!
 
 
 experience:
   enable: true
   item:
-    - logo: https://res.cloudinary.com/samrobbins/image/upload/f_auto,q_auto/v1591793271/logos/logos_google_id6v9a.svg
-      title: init.g
-      company: Google
-      duration: November 2019
+    - logo: logos/seg.png
+      title: Estagiário de Analise de Dados
+      company: SEG Automotive
+      duration: Abril 2025 - Presente 
+      
 hackathons:
   enable: false
   item:
@@ -68,12 +70,12 @@ certifications:
 education:
   enable: true
   item:
-    - title: BSc Computer Science
-      year: 2018 - Present
-      academy: Durham University
-      image: https://res.cloudinary.com/samrobbins/image/upload/f_auto,q_auto/v1591793268/logos/logos_Durham_fc2sae.svg
+    - title: Ciência da Computação
+      year: 2024 - Presente
+      academy: Centro Universitário Padre Anchieta  
+      image: logos/anchieta.png
 leadership:
-  enable: true
+  enable: false
   item:
     - logo: https://res.cloudinary.com/samrobbins/image/upload/f_auto,q_auto/v1591793280/logos/logos_yl_qozav6.webp
       title: Young Leader

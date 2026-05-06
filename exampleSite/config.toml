@@ -1,7 +1,7 @@
 # Base information
 baseURL = "https://brunorwell.github.io/"
 languageCode = "en-gb"
-title = "Sam Robbins"
+title = "Bruno Vinicios - Portifólio"
 googleAnalytics = ""
 
 [module]
@@ -25,41 +25,41 @@ googleAnalytics = ""
 # navigation
 [menu]
 
-  [[menu.main]]
-  name = "About"
-  URL = "about"
-  weight = 1
+  #[[menu.main]]
+  #name = "About"
+  #URL = "about"
+  #weight = 1
 
-  [[menu.main]]
-  name = "Blog"
-  URL = "blog"
-  weight = 2
+  #[[menu.main]]
+  #name = "Blog"
+  #URL = "blog"
+  #weight = 2
 
   [[menu.main]]
   name = "Portfolio"
   URL = "portfolio"
   weight = 3
 
-  [[menu.main]]
-  name = "Contact"
-  URL = "contact"
-  weight = 4
+  #[[menu.main]]
+  #name = "Contact"
+  #URL = "contact"
+  #weight = 4
 
 [params]
 home = "Home"
 
 # Meta data
 description = "The website of Sam Robbins, 2nd Year Computer Science Student at Durham University"
-author = "Sam Robbins"
+author = "Bruno Vinicios"
 
   [params.contact]
   enable = true
   formAction = "" # contact form works with formspree.io
 
   [params.footer]
-  email = "samrobbinsgb@gmail.com"
-  address = "Durham, UK"
-  googlemaps = "https://www.google.com/maps/embed/v1/place?q=place_id:ChIJwbHYJaUqfEgRK0Ui9dVGimc&key=AIzaSyAE_4rVAKux_DSPcb_OdSRDaovtPOSk_3U"
+  email = "brunorwell12@outlook.com"
+  address = "Jundiaí, SP"
+  
 
 [markup]
   [markup.highlight]
