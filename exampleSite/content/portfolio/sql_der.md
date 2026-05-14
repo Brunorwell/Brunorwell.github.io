@@ -1,11 +1,11 @@
 +++
 categories = ["sql"]
 coders = []
-date = 2020-06-19T23:00:00Z
+date = 2026-05-13T23:00:00Z
 description = "Diagrama entidade relacionamento e construção de banco de dados usando SQL Server inspirado no workflow das ordens de produção da empresa The Fini Company."
 github = ["https://github.com/Brunorwell/Production_Order"]
-image = "https://res.cloudinary.com/samrobbins/image/upload/q_auto/v1591793276/logos/logos_hugo_h2xbne.svg"
-title = "Diagrama Entidade-Relacionamento (DER)"
+image = "/logos/sql1.png"
+title = "Diagrama Entidade - Relacionamento (DER)"
 type = "post"
 [[tech]]
 logo = "/logos/sql_server.svg"

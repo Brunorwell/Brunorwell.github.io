@@ -1,3 +1,5 @@
 filter:
   - label: SQL
     value: sql
+  - label: RPA
+    value: rpa
