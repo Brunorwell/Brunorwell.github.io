@@ -57,25 +57,17 @@ Seja qual for a decisão, o analista pode escrever uma observação. Ao clicar n
 3. Apontamentos marcados como **PENDENTES continuam sendo classificados como NÃO** até que uma providência seja tomada.
 
 ## Pipeline
-
-![](/images/Pipeline_VBA.svg)
-
 >>Essa seção se concentra nos aspectos mais cruciais para o tratamento dos dados. O pipeline real incluiu diversas tratativas, mas para fins de apresentação, apenas as tratativas mais fundamentais estão presentes nessa seção.
+
+![](/images/pipeline_projeto_vba15.svg)
 
 ### 1. Parâmetros temporais:
 Como foi apresentado anteriormente, a primeira aba do **Gerador de relatórios** é capaz de armazenar os parâmetros **mês** e **ano** dentro de uma tabela Excel **(Periode_Paramenter)**.
 
 Esses valores são passados para duas variáveis do pipeline e utilizadas nos filtros das colunas **Year** e **Month**.
 
-```py
-AnoParametro = Periode_Paramenter[Year]{0},
-MesParametro = Periode_Paramenter[Month]{0},
+![](/images/paramentros_temporais_code.svg)
 
-#"Filtro por parâmetro" =
-    Table.SelectRows(
-        #"Linhas filtradas",
-        	each [Year] = AnoParametro and [Month] <= MesParametro
-```
 O resultado após a aplicação dos filtros é uma tabela filtrada somente pelo ano selecionado na ferramenta e meses menores ou iguais ao mês selecionado.
 
 ### 2. O campo projeto
@@ -90,8 +82,6 @@ Projetos internos podem sofrer mudanças em suas descrições. Para que os usuá
 
 >>Quando comecei o meu estágio, notei que não havia validação de input de valores nas planilhas. Desenvolvi uma macro (VBA) para fazer essa validação. Porém, como nem todos os usuários possuíam essa macro, a medida de **capitalização da descrição do projeto foi necessária.**
 
-![](/images/primeiro.svg)
-
 #### Projetos de Clientes e flags de projetos aplicáveis ao Mover e Lei do Bem
 
 Projetos de clientes sofrem mudanças frequentes em suas descrições. Para evitar que a base de dados utilizada em relatórios tenha mais de uma descrição para um mesmo projeto se fez necessário o join com a tabela **Dados Registro** que armazena a descrição mais recente do projeto.
@@ -100,7 +90,7 @@ A conexão é feita pela Projeto_Key2 que é formada com a seguinte regra: para 
 
 Nessa tabela coletamos os campos **Mover** e **Lei do Bem** que servem de flags para a indicação se um projeto é aplicável a esses programas governamentais.
 
-![](/images/segundo.svg)
+![](/images/primeiro_segundo_join3.svg)
 
 #### Enriquecimento de campos
 
@@ -110,12 +100,10 @@ Através da tabela funcionário podemos coletar os campos **matrícula** e **set
 
 >>Importante salientar que essa não é a melhor forma de identificar um usuário em um banco de dados, porém por limitações da ferramenta essa foi a maneira escolhida pelos desenvolvedores da ferramenta de apontamentos de horas.
 
-![](/images/terceiro.svg)
-
 ##### Tabela Contrato: Campo Contrato
 Através da tabela funcionário podemos coletar os campos **contrato**. A chave de conexão é o **Nome do Usuário**. Logo em seguida, a base é filtrada para que somente as horas de **Mensalistas** sejam usadas.
 
-![](/images/quarto.svg)
+![](/images/terceiro_quarto_join.svg)
 
 #### Coluna de Apontamentos Inconsistentes
 
@@ -123,7 +111,7 @@ A tabela **Datas de inativação de projetos** armazena datas de inativação de
 
 Como vimos na seção de apresentação da aplicação **Gerador de relatórios**, a tabela **Apontamentos Inconsistentes armazena a decisão do analista sobre apontamentos de horas que precisam de uma análise mais cuidadosa**
 
-![](/images/datas_invalidos2.svg)
+![](/images/sexto_join1.svg)
 
 
 

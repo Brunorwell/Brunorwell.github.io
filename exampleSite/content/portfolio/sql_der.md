@@ -40,30 +40,8 @@ Como o documento não é organizado como um banco de dados relacional, foi neces
 
 **Abaixo segue o MER (Modelo Entidade Relacionamento):**
 
+![](/images/mer10.svg)
 
-```SQL
-  PRODUCTION_ORDER(Po_id[PK], Issue_Date, Beginning_date, Delivery_date, OBS, Lot_id[FK])
-
-  PRODUCT_UNITY(Product_id[PK], product_name) 
-
-  PRODUCT_WEIGHT_UNITY(Product_id[PK and FK], Weight_id[PK and FK]) 
-
-  PRODUCT_WEIGHT(Weight_id[PK], Box_id[FK], Weight_desc)
-
-  TRANSLATION_PRODUCT(PRODUCT_id[PK and FK], Idiom_id[PK and FK], product_name_trans)
-
-  IDIOM(Idiom_id[PK], Idiom_name)
-
-  BOX_REGISTER(Box_id[PK], Box_desc) 	
-
-  LOT(Lot_id[PK], Lot_category_id[FK], Lot_number) 
-
-  LOT_CATEGORY(Lot_category_id[PK], Lot_cod)
-
-  BOX_MOVEMENT(Box_id[PK AND FK], lot_id[PK AND FK], Quantity)
-
-  PRODUCT_MOVEMENT(Product_id[PK and FK], Weight_id[PK and FK], Lot_id[PK AND FK], Quantity)
-```
 ## Relacionamentos críticos
 
 ### 1. [PRODUCT_UNITY] N:N [PRODUCT_WEIGHT] (Muitos para muitos):
@@ -88,9 +66,7 @@ A entidade **PRODUCT_WEIGHT** é responsável por armazenar os tipos de pesos qu
 
 Como **muitos produtos podem ser associados a N pesos** e **muitos pesos podem ser associados a N produtos**, é necessária a criação de uma **tabela associativa** para garantir que todas as combinações sejam possíveis. Em tabelas desse tipo é criada uma **chave primária composta** formada pelas duas chaves primárias das tabelas que precisam ser relacionadas. Desse modo, é possível registrar o valor produto-peso no banco de dados!
 
-```SQL
-  PRODUCT_WEIGHT_UNITY(Product_id[PK and FK], Weight_id[PK and FK]) 
-```
+![](/images/mer_product_unity3.svg)
 
 | product_id | weight_id
 |---|---|
@@ -101,17 +77,8 @@ Como **muitos produtos podem ser associados a N pesos** e **muitos pesos podem s
 | F003 | 113018A00104|
 #### Demonstração do comportamento da tabela associativa:
 
-##### Query:
-```SQL
---Functionality of the associative table PRODUCT_WEIGHT_UNITY:
-SELECT pu.product_id, pu.product_name 'Product Name', pw.weight_id, pw.weight_desc 'Weight description'
-FROM product_weight_unity AS pwu -- Associative table playing its rule by connecting the tables
-    INNER JOIN product_unity AS pu
-        ON pu.product_id = pwu.product_id
-    INNER JOIN product_weight AS pw
-        ON pw.weight_id = pwu.weight_id
-WHERE pu.product_id like 'F%'
-```
+![](/images/sql_querry_1v6.svg)
+
 ##### Output:
 | product_id | Product Name |	weight_id |	Weight description
 |---|---|---|---|
@@ -160,9 +127,8 @@ A entidade **LOT_CATEGORY** é responsável por **armazenar essas categorias**:
 
 #### Regra de negócio garantida: um lote pode ter apenas uma categoria.
 Como um lote pode pertencer a apenas **um tipo de lote**, a chave primária de **LOT_CATEGORY** entra como chave estrangeira na tabela **LOT**.
-```SQL
-  LOT(Lot_id[PK], Lot_category_id[FK], Lot_number) 
-```
+
+![](/images/mer_lot2.svg)
 
 ### 4. [PRODUCT_MOVEMENT] 1:1 [LOT] 1:1 [PRODUCTION_ORDER] 
 
@@ -178,38 +144,8 @@ Uma ordem de produção compartilha um mesmo lote registrado na tabela **PRODUCT
 
 Por conta da normalização até a Terceira Forma Normal, cada tabela é especialmente designada para armazenar um tipo de informação. Desse modo, para a formulação de uma query que detalhe todos os elementos associados a uma ordem de produção, são necessários diversos joins:
 
-##### Query:
-```SQL
---Production order generation:
-SELECT
-     PO.po_id            AS 'Product Order',
-     PO.issue_date       AS 'Issue Date',
-     PO.beginning_date   AS 'Start Date',
-     PO.delivery_date    AS 'Delivery Date',
-     PO.obs              AS 'Obs',
-     PU.product_name     AS 'Product Name',
-     PM.quantity         AS 'Quantity of Products',
-     PW.weight_desc      AS 'Weight Description',
-     BR.box_desc         AS 'Box Description',
-     BM.quantity         AS 'Box Quantity',
-     L.lot_number        AS 'Lot Number',
-     LC.lot_cod          AS 'Lot Code'
-FROM production_order AS PO
-     INNER JOIN lot AS L                -- Lote
-          ON PO.lot_id = L.lot_id
-     INNER JOIN product_movement AS PM  -- Quantidade de produtos
-          ON L.lot_id = PM.lot_id
-     INNER JOIN product_unity AS PU     -- Descrição do produto
-          ON PM.product_id = PU.product_id
-     INNER JOIN product_weight AS PW    -- Descrição do peso
-          ON PM.weight_id = PW.weight_id
-     INNER JOIN box_movement AS BM      -- Quantidade de embalagens
-          ON L.lot_id = BM.lot_id
-     INNER JOIN box_register AS BR      -- Descrição da embalagem
-          ON BM.box_id = BR.box_id
-     INNER JOIN lot_category AS LC      -- Categoria do lote
-          ON L.lot_category_id = LC.lot_category_id
-```
+![](/images/sql_query_2V6.svg)
+
 ##### Output:
 | Product Order | Issue Date | Start Date | Delivery Date | Product Name | Quantity of Products | Weight Description | Box Description | Box Quantity | Lot Number | Lot Code |
 |---|---|---|---|---|---|---|---|---|---|---|
