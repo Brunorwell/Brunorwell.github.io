@@ -62,6 +62,9 @@ author = "Bruno Vinicios"
   
 
 [markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
   [markup.highlight]
     codeFences = true
     guessSyntax = false

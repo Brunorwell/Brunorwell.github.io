@@ -36,57 +36,201 @@ Como o documento não é organizado como um banco de dados relacional, foi neces
 
 **A imagem abaixo representa o Diagrama Entidade Relacionamento do modelo:**
 
-![](/images/erd.jpeg)
+<style>
+  .content img.sql-image-fullsize {
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+  }
+</style>
+
+<img
+  src="/images/erd.jpeg"
+  alt="SQL Query Diagram"
+  class="sql-image-fullsize"
+  style="max-width: 100% !important; width: auto !important; height: auto !important; display: block; margin: 0 auto;"
+/>
 
 **Abaixo segue o MER (Modelo Entidade Relacionamento):**
 
-![](/images/mer10.svg)
+<style>
+  .content img.sql-image-fullsize {
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+  }
+</style>
+
+<img
+  src="/images/mer10.svg"
+  alt="SQL Query Diagram"
+  class="sql-image-fullsize"
+  style="max-width: 100% !important; width: auto !important; height: auto !important; display: block; margin: 0 auto;"
+/>
 
 ## Relacionamentos críticos
 
-### 1. [PRODUCT_UNITY] N:N [PRODUCT_WEIGHT] (Muitos para muitos):
+### 1. [PRODUCT_UNITY] N:N [PRODUCT_WEIGHT] (Muitos para muitos): 
 
 #### Definição de tabelas
 A entidade **PRODUCT_UNITY** é responsável por armazenar todos os doces produzidos:
 
-| product_id | product_name |
-|---|---|
-| A008 | AMORAS 
-| D017 | DENTADURAS
-
+<table style="border-collapse: collapse; margin-left: auto; margin-right: auto; width: 300px; font-family: Arial, sans-serif; border-radius: 14px; overflow: hidden;">
+    <tr style="background-color: #007BFF; color: white;">
+        <th style="padding: 8px; border: 1px solid #ccc;">Product_id</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Product_name</th>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">A008</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">AMORAS</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">D017</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">DENTADURAS</td>
+    </tr>
+</table>
+<br>
 
 A entidade **PRODUCT_WEIGHT** é responsável por armazenar os tipos de pesos que um produto pode ser associado:
 
-| weight_id | weight_desc | box_id |
-|---|---|---|
-| 111070F07611 | 12X70G | ME0BR257681 |
-| 113018A00104 | 24X12X15G | ME0BR257703 |
+<table style="border-collapse: collapse; margin-left: auto; margin-right: auto; width: 500px; font-family: Arial, sans-serif; border-radius: 14px; overflow: hidden;">
+    <tr style="background-color: #007BFF; color: white;">
+        <th style="padding: 8px; border: 1px solid #ccc;">Weight_id</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Weight_desc</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Box_id</th>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">111070F07611</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">12X70G</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">ME0BR257681</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">113018A00104</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">24X12X15G</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">ME0BR257703</td>
+    </tr>
+</table>
 
 #### A solução para o relacionamento muitos para muitos (N:N): A entidade associativa
 
-Como **muitos produtos podem ser associados a N pesos** e **muitos pesos podem ser associados a N produtos**, é necessária a criação de uma **tabela associativa** para garantir que todas as combinações sejam possíveis. Em tabelas desse tipo é criada uma **chave primária composta** formada pelas duas chaves primárias das tabelas que precisam ser relacionadas. Desse modo, é possível registrar o valor produto-peso no banco de dados!
+Como **muitos produtos podem ser associados a N pesos** e **muitos pesos podem ser associados a N produtos**, é necessária a criação de uma **tabela associativa** para garantir que todas as combinações sejam possíveis
 
-![](/images/mer_product_unity3.svg)
 
-| product_id | weight_id
-|---|---|
-| F001 | 111070F07611|
-| F001 | 113018A00104|
-| F002 | 111070F07611|
-| F002 | 113018A00104|
-| F003 | 113018A00104|
+Em tabelas desse tipo é criada uma **chave primária composta** formada pelas duas chaves primárias das tabelas que precisam ser relacionadas. Desse modo, é possível registrar o valor produto-peso no banco de dados!
+
+
+<style>
+  .content img.sql-image-fullsize {
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+  }
+</style>
+
+<img
+  src="/images/mer_product_unity3.svg"
+  alt="SQL Query Diagram"
+  class="sql-image-fullsize"
+  style="max-width: 100% !important; width: auto !important; height: auto !important; display: block; margin: 0 auto;"
+/>
+
+Podemos notar o registros de produtos tendo associação com diversos id de pesos.
+
+<table style="border-collapse: collapse; margin-left: auto; margin-right: auto; width: 400px; font-family: Arial, sans-serif; border-radius: 14px; overflow: hidden;">
+    <tr style="background-color: #007BFF; color: white;">
+        <th style="padding: 8px; border: 1px solid #ccc;">Product_id</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Weight_id</th>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">F001</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">111070F07611</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">F001</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">113018A00104</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">F002</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">111070F07611</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">F002</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">113018A00104</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">F003</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">113018A00104</td>
+    </tr>
+</table>
+
 #### Demonstração do comportamento da tabela associativa:
 
-![](/images/sql_querry_1v6.svg)
+##### Query:
+
+<style>
+  .content img.sql-image-fullsize {
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+  }
+</style>
+
+<img
+  src="/images/sql_querry_1v6.svg"
+  alt="SQL Query Diagram"
+  class="sql-image-fullsize"
+  style="max-width: 100% !important; width: auto !important; height: auto !important; display: block; margin: 0 auto;"
+/>
 
 ##### Output:
-| product_id | Product Name |	weight_id |	Weight description
-|---|---|---|---|
-|F001	| FRUTIE SOBREM MORANGO CREMOSO	| 111070F07611	| 12X70G
-|F001	| FRUTIE SOBREM MORANGO CREMOSO	| 113018A00104	| 24X12X15G
-|F002	| FRUTIE SOBREM PAVE DE ABACAXI	| 111070F07611	| 12X70G
-|F002	| FRUTIE SOBREM PAVE DE ABACAXI	| 113018A00104	| 24X12X15G
-|F003	| FRUTIE SOBREM TORTA DE LIMAO	| 113018A00104	| 24X12X15G
+
+<table style="border-collapse: collapse; margin-left: auto; margin-right: auto; width: 900px; font-family: Arial, sans-serif; border-radius: 14px; overflow: hidden;">
+    <tr style="background-color: #007BFF; color: white;">
+        <th style="padding: 8px; border: 1px solid #ccc;">Product_id</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Product Name</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">weight_id</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Weight description</th>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">F001</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">FRUTIE SOBREM MORANGO CREMOSO</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">111070F07611</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">12X70G</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">F001</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">FRUTIE SOBREM MORANGO CREMOSO</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">113018A00104</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">24X12X15G</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">F002</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">FRUTIE SOBREM PAVE DE ABACAXI</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">111070F07611</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">12X70G</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">F002</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">FRUTIE SOBREM PAVE DE ABACAXI</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">113018A00104</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">24X12X15G</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">F003</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">FRUTIE SOBREM TORTA DE LIMAO</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">113018A00104</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">24X12X15G</td>
+    </tr>
+</table>
+<br>
 
 Podemos observar o comportamento de muitos para muitos nessa tabela retornada pela query, notando que um **weight_id** pode estar associado a mais de um doce e um **product_id** pode estar associado a mais de um peso.
 
@@ -96,10 +240,20 @@ Podemos observar o comportamento de muitos para muitos nessa tabela retornada pe
 
 Como vimos no tópico anterior, a entidade **PRODUCT_WEIGHT** armazena os valores de peso que um produto pode assumir. Introduzo agora a entidade **BOX_REGISTER**, que armazena especificações de todas as embalagens disponíveis pela logística:
 
-| box_id | box_desc |
-|---|---|
-| ME0BR257681	| CX PAP COLOR 12X100G V0 |
-| ME0BR257703	| CX COLOR DP AUT 24X12X15 V0 | 
+<table style="border-collapse: collapse; margin-left: auto; margin-right: auto; width: 600px; font-family: Arial, sans-serif; border-radius: 14px; overflow: hidden;">
+    <tr style="background-color: #007BFF; color: white;">
+        <th style="padding: 8px; border: 1px solid #ccc;">Box_id</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Box_desc</th>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">ME0BR257681</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">CX PAP COLOR 12X100G V0</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">ME0BR257703</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">CX COLOR DP AUT 24X12X15 V0</td>
+    </tr>
+</table> 
 
 #### O relacionamento ideal:
 
@@ -110,25 +264,76 @@ Como um tipo de peso pode assumir N tipos de caixas, o relacionamento escolhido 
 #### Definição de tabelas
 
 Produtos são organizados em categorias e a **tabela LOT reflete essa regra**:
-| lot_id | lot_number | Lot_category_id| 
-|---|---|---|
-|1|446|2|
-|2|450|1|
-|3|514|3|
-|4|994|3|
+
+<table style="border-collapse: collapse; margin-left: auto; margin-right: auto; width: 500px; font-family: Arial, sans-serif; border-radius: 14px; overflow: hidden;">
+    <tr style="background-color: #007BFF; color: white;">
+        <th style="padding: 8px; border: 1px solid #ccc;">Lot_id</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Lot_number</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Lot_category_id</th>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">1</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">446</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">2</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">2</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">450</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">1</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">3</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">514</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">3</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">4</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">994</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">3</td>
+    </tr>
+</table>
+<br>
 
 A entidade **LOT_CATEGORY** é responsável por **armazenar essas categorias**:
 
-|Lot_category_id| lot_cod|
-|---|---|
-|1|GOMA|
-|2|GEL|
-|3|CHICLETE|  
+<table style="border-collapse: collapse; margin-left: auto; margin-right: auto; width: 400px; font-family: Arial, sans-serif; border-radius: 14px; overflow: hidden;">
+    <tr style="background-color: #007BFF; color: white;">
+        <th style="padding: 8px; border: 1px solid #ccc;">Lot_category_id</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Lot_cod</th>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">1</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">GOMA</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">2</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">GEL</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">3</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">CHICLETE</td>
+    </tr>
+</table>
 
 #### Regra de negócio garantida: um lote pode ter apenas uma categoria.
 Como um lote pode pertencer a apenas **um tipo de lote**, a chave primária de **LOT_CATEGORY** entra como chave estrangeira na tabela **LOT**.
 
-![](/images/mer_lot2.svg)
+<style>
+  .content img.sql-image-fullsize {
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+  }
+</style>
+
+<img
+  src="/images/mer_lot2.svg"
+  alt="SQL Query Diagram"
+  class="sql-image-fullsize"
+  style="max-width: 100% !important; width: auto !important; height: auto !important; display: block; margin: 0 auto;"
+/>
 
 ### 4. [PRODUCT_MOVEMENT] 1:1 [LOT] 1:1 [PRODUCTION_ORDER] 
 
@@ -144,207 +349,145 @@ Uma ordem de produção compartilha um mesmo lote registrado na tabela **PRODUCT
 
 Por conta da normalização até a Terceira Forma Normal, cada tabela é especialmente designada para armazenar um tipo de informação. Desse modo, para a formulação de uma query que detalhe todos os elementos associados a uma ordem de produção, são necessários diversos joins:
 
-![](/images/sql_query_2V6.svg)
+##### Query:
+
+<style>
+  .content img.sql-image-fullsize {
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+  }
+</style>
+
+<img
+  src="/images/sql_query_2V6.svg"
+  alt="SQL Query Diagram"
+  class="sql-image-fullsize"
+  style="max-width: 100% !important; width: auto !important; height: auto !important; display: block; margin: 0 auto;"
+/>
 
 ##### Output:
-| Product Order | Issue Date | Start Date | Delivery Date | Product Name | Quantity of Products | Weight Description | Box Description | Box Quantity | Lot Number | Lot Code |
-|---|---|---|---|---|---|---|---|---|---|---|
-| 61549 | 2024-12-12 | 2024-12-09 | 2024-12-15 | AMORAS | 180000 | 12X70G | CX PAP COLOR 12X100G V0 | 200 | 450 | GOMA |
-| 61489 | 2026-05-10 | 2026-05-11 | 2026-05-15 | FRUTIE SOBREM PAVE DE ABACAXI | 1000 | 12X70G | CX PAP COLOR 12X100G V0 | 600 | 994 | GOMA |
-| 61487 | 2024-11-08 | 2024-11-11 | 2024-11-17 | FRUTIE SOBREM TORTA DE LIMAO | 43200 | 24X12X15G | CX COLOR DP AUT 24X12X15 V0 | 150 | 446 | GOMA |
-| 61488 | 2026-05-03 | 2026-05-06 | 2026-10-06 | FRUTIE SOBREM MORANGO CREMOSO | 1008 | 24X12X15G | CX COLOR DP AUT 24X12X15 V0 | 500 | 514 | GOMA |
-| 61490 | 2026-05-10 | 2026-05-11 | 2026-05-17 | FRUTIE SOBREM PAVE DE ABACAXI | 1000 | 24X12X15G | CX COLOR DP AUT 24X12X15 V0 | 180 | 995 | GOMA |
+
+<table style="border-collapse: collapse; margin-left: auto; margin-right: auto; width: 100%; font-family: Arial, sans-serif; font-size: 14px; border-radius: 14px; overflow: hidden;">
+    <tr style="background-color: #007BFF; color: white;">
+        <th style="padding: 8px; border: 1px solid #ccc;">Product Order</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Issue Date</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Start Date</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Delivery Date</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Product Name</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Quantity of Products</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Weight Description</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Box Description</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Box Quantity</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Lot Number</th>
+        <th style="padding: 8px; border: 1px solid #ccc;">Lot Code</th>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">61549</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">2024-12-12</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">2024-12-09</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">2024-12-15</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">AMORAS</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">180000</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">12X70G</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">CX PAP COLOR 12X100G V0</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">200</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">450</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">GOMA</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">61489</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">2026-05-10</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">2026-05-11</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">2026-05-15</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">FRUTIE SOBREM PAVE DE ABACAXI</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">1000</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">12X70G</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">CX PAP COLOR 12X100G V0</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">600</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">994</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">GOMA</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">61487</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">2024-11-08</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">2024-11-11</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">2024-11-17</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">FRUTIE SOBREM TORTA DE LIMAO</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">43200</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">24X12X15G</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">CX COLOR DP AUT 24X12X15 V0</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">150</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">446</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">GOMA</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">61488</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">2026-05-03</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">2026-05-06</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">2026-10-06</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">FRUTIE SOBREM MORANGO CREMOSO</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">1008</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">24X12X15G</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">CX COLOR DP AUT 24X12X15 V0</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">500</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">514</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">GOMA</td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 1px solid #ccc;">61490</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">2026-05-10</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">2026-05-11</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">2026-05-17</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">FRUTIE SOBREM PAVE DE ABACAXI</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">1000</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">24X12X15G</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">CX COLOR DP AUT 24X12X15 V0</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">180</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">995</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">GOMA</td>
+    </tr>
+</table>
 
 ## Criação do banco de dados:
 
-```SQL
-CREATE DATABASE PRODUCTION_ORDER_DATABASE
-GO
+<style>
+  .content img.sql-image-fullsize {
+    max-width: none !important;
+    max-height: none !important;
+    width: auto !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+  }
+</style>
 
-USE PRODUCTION_ORDER_DATABASE
-GO
+<img
+  src="/images/sql_creation6.svg"
+  alt="SQL Query Diagram"
+  class="sql-image-fullsize"
+  style="max-width: none !important; max-height: none !important; width: auto !important; height: auto !important; display: block; margin: 0 auto;"
+/>
 
---TABLES CREATION:
 
-CREATE TABLE product_unity( 
-	product_id	char(04),
-	product_name		varchar(100),
-	constraint pk_product primary key(product_id)
-)
-GO
-
-CREATE TABLE idiom(
-	idiom_id		int not null,
-	idiom_name		varchar(15),
-	constraint pk_idiom primary key (idiom_id)
-)
-GO
-
-CREATE TABLE box_register(
-	box_id		char(11),
-	box_desc	varchar(100),	
-	constraint pk_box primary key	(box_id)
-)
-GO
-
-CREATE TABLE lot_category(
-	lot_category_id	int not null,
-	lot_cod		char(08),
-	constraint pk_category_id primary key (lot_category_id)
-)
-GO
-
-CREATE TABLE product_weight(
-	weight_id	char(12),
-	weight_desc	varchar(50),
-	box_id		char(11),
-	constraint pk_weight_id primary key (weight_id),
-	constraint fk_box_id foreign key (box_id) references box_register(box_id)
-)
-GO
-
-CREATE TABLE product_weight_unity(
-	product_id	char(04),
-	weight_id	char(12),
-	constraint pk_product_weight primary key (product_id, weight_id),
-	constraint fk_product_id foreign key (product_id) references product_unity(product_id),
-	constraint fk_weight_id foreign key (weight_id) references product_weight(weight_id)
-)
-GO
-
-CREATE TABLE translation_product(
-	product_id			char(04),
-	idiom_id			int not null,
-	product_name_trans	varchar(50),
-	constraint pk_idiom_weight primary key (product_id, idiom_id),
-	constraint fk_product_trans	foreign key (product_id) references product_unity(product_id),
-	constraint fk_idiom_id  foreign key (idiom_id)  references idiom(idiom_id)
-)
-GO
-
-CREATE TABLE lot(
-	lot_id	int not null,
-	lot_number int not null,
-	lot_category_id int not null,
-	constraint pk_lot_id primary key (lot_id),
-	constraint fk_lot_category_id foreign key (lot_category_id) references lot_category(lot_category_id)
-)
-GO
-
-CREATE TABLE production_order(
-	po_id			int not null,
-	issue_date		date,
-	beginning_date	date,
-	delivery_date	date,
-	obs				varchar(100),
-	lot_id	int not null UNIQUE,
-	constraint fk_lot_po foreign key (lot_id) references lot(lot_id),
-	constraint pk_po_id primary key (po_id),
-)		
-GO
-
-CREATE TABLE product_movement(
-    product_id  char(04)    not null,
-    weight_id   char(12)	not null,
-    lot_id      int         not null UNIQUE,
-    quantity    int         not null,
-    constraint pk_pm primary key (product_id, weight_id, lot_id),
-    constraint fk_pwu_pm foreign key (product_id, weight_id) 
-        references product_weight_unity(product_id, weight_id),
-    constraint fk_lot_pm foreign key (lot_id) references lot(lot_id)
-)
-
-CREATE TABLE box_movement(
-	box_id	char(11),
-	lot_id	int not null,
-	quantity int not null,
-	constraint fk_box_bm foreign key (box_id) 
-		references box_register(box_id),
-	constraint fk_lot_bm foreign key (lot_id) 
-		references lot(lot_id),
-	constraint pk_bm primary key (box_id, lot_id)
-)
-GO
-```
 ## Inserção dos dados 
-``` SQL
---DATA INSERTION
-INSERT INTO product_unity (product_id, product_name)
-	VALUES	('F001', 'FRUTIE SOBREM MORANGO CREMOSO'),
-			('F002', 'FRUTIE SOBREM PAVE DE ABACAXI'),
-			('F003', 'FRUTIE SOBREM TORTA DE LIMAO'),
-			('A001', 'AMORAS'),
-			('D001', 'DENTADURAS')
-GO
 
-INSERT INTO idiom(idiom_id, idiom_name)
-	VALUES	(1, 'ES'),
-			(2, 'EN')
-GO
+<style>
+  .content img.sql-image-fullsize {
+    max-width: none !important;
+    max-height: none !important;
+    width: auto !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+  }
+</style>
 
-INSERT INTO box_register(box_id, box_desc)
-	VALUES	('ME0BR257681', 'CX PAP COLOR 12X100G V0'),
-			('ME0BR257703', 'CX COLOR DP AUT 24X12X15 V0')
-GO
-
-INSERT INTO lot_category(lot_category_id, lot_cod)
-	VALUES	(1, 'GOMA'),
-			(2,	'GEL'),
-			(3, 'CHICLETE')
-GO
-
-INSERT INTO product_weight(weight_id, weight_desc, box_id)
-	VALUES	('111070F07611', '12X70G', 'ME0BR257681'),
-			('113018A00104', '24X12X15G', 'ME0BR257703')
-GO
-
-INSERT INTO product_weight_unity(product_id, weight_id)
-	VALUES	('A001', '111070F07611'),
-			('F001', '113018A00104'),
-			('F001', '111070F07611'),
-			('F002', '111070F07611'),
-			('F002', '113018A00104'),
-			('F003', '113018A00104')
-GO
-
-INSERT INTO translation_product(product_id, idiom_id, product_name_trans)
-	VALUES	('F001', 1, 'FRUTIE POSTRE FRESA CREMOSA'),
-			('F001', 2, 'FRUTIE DESSERT CREAMY STRAWBERRY'),
-			('F002', 1, 'FRUTIE POSTRE PAVÉ DE PIÑA'),
-			('F002', 2, 'FRUTIE DESSERT PINEAPPLE PAVÉ'),
-			('F003', 1, 'FRUTIE POSTRE TARTA DE LIMÓN'),
-			('F003', 2, 'FRUTIE DESSERT LEMON PIE')
-GO
-
-INSERT INTO lot(lot_id, lot_number, lot_category_id)
-	VALUES	(1, 446, 1),
-			(2, 450, 1),
-			(3, 514, 1),
-			(4, 994, 1),
-			(5, 995, 1)
-GO
-
-INSERT INTO production_order(po_id, issue_date, beginning_date, delivery_date, obs, lot_id)
-	VALUES	(61549, '12/12/2024', '12/09/2024', '12/15/2024', null, 2),
-			(61487, '11/08/2024', '11/11/2024', '11/17/2024', null, 1),
-			(61488, '05/03/2026', '05/06/2026', '10/06/2026', null, 3),
-			(61489, '05/10/2026', '05/11/2026', '05/15/2026', null, 4),
-			(61490, '05/10/2026', '05/11/2026', '05/17/2026', null, 5)
-GO
-
-INSERT INTO product_movement(product_id, weight_id, lot_id, quantity)
-	VALUES	('A001','111070F07611', 2, 180000),
-			('F003','113018A00104', 1, 43200),
-			('F001', '113018A00104',3, 1008),
-			('F002','111070F07611', 4, 1000),
-			('F002','113018A00104', 5, 1000)
-GO
-
-INSERT INTO box_movement(box_id, lot_id, quantity)
-	VALUES	('ME0BR257703', 3, 500),
-			('ME0BR257681', 4, 600),
-			('ME0BR257681', 2, 200),
-			('ME0BR257703', 1, 150),
-			('ME0BR257703', 5, 180)
-GO
-```
+<img
+  src="/images/sql_input2.svg"
+  alt="SQL Query Diagram"
+  class="sql-image-fullsize"
+  style="max-width: none !important; max-height: none !important; width: auto !important; height: auto !important; display: block; margin: 0 auto;"
+/>
