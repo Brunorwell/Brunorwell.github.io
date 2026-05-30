@@ -177,7 +177,7 @@ Abaixo seguem dois exemplos de chamadas das funções para a geração dos relat
 </style>
 
 <img
-  src="/images/chamada_funcao2.svg"
+  src="/images/chamada_funcao2_2.svg"
   alt="SQL Query Diagram"
   class="sql-image-fullsize"
   style="max-width: none !important; max-height: none !important; width: auto !important; height: auto !important; display: block; margin: 0 auto;"
